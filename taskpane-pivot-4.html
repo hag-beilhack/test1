@@ -25,6 +25,11 @@
             context.workbook.worksheets.getActiveWorksheet().getRange("A1").values = [['done.']];
 			
 			var sepp = Office.context.workbook; 
+			const pivotTables = context.workbook.pivotTables;
+			
+			// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-refresh.yaml
+			const pivotTable = context.workbook.pivotTables.getItem("PivotTable5");
+			pivotTable.refresh();
 
             // sync the context to run the previous API call
             return context.sync();
@@ -33,3 +38,5 @@
 </script>
 
 </html>
+
+
