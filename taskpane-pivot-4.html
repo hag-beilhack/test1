@@ -21,15 +21,15 @@
     function updatePivot() {
         Excel.run(context => {
 
-            // Insert text into cell A1
-            context.workbook.worksheets.getActiveWorksheet().getRange("A1").values = [['done.']];
-			
 			var sepp = Office.context.workbook; 
 			const pivotTables = context.workbook.pivotTables;
 			
 			// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-refresh.yaml
-			const pivotTable = context.workbook.pivotTables.getItem("PivotTable5");
+			var pivotTable = context.workbook.pivotTables.getItem("PivotTable9");
 			pivotTable.refresh();
+			pivotTable = context.workbook.pivotTables.getItem("PivotTable5");
+			pivotTable.refresh();
+            context.workbook.worksheets.getActiveWorksheet().getRange("A1").values = [['done2.']];
 
             // sync the context to run the previous API call
             return context.sync();
