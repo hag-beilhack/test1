@@ -1,0 +1,42 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Office JavaScript API -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+</head>
+
+<body>
+    <button id="button">update</button>
+</body>
+
+<script>
+    Office.onReady((info) => {
+        // Check that we loaded into Excel
+        if (info.host === Office.HostType.Excel) {
+            document.getElementById("button").onclick = updatePivot;
+        }
+    });
+
+    function updatePivot() {
+        Excel.run(context => {
+
+			var sepp = Office.context.workbook; 
+			const pivotTables = context.workbook.pivotTables;
+			
+			// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-refresh.yaml
+			var pivotTable = context.workbook.pivotTables.getItem("PivotTable9");
+			pivotTable.refresh();
+			pivotTable = context.workbook.pivotTables.getItem("PivotTable5");
+			pivotTable.refresh();
+            context.workbook.worksheets.getActiveWorksheet().getRange("A1").values = [['done5.']];
+
+            // sync the context to run the previous API call
+            return context.sync();
+        });
+    }
+</script>
+
+</html>
+
+
